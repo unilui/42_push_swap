@@ -1,0 +1,24 @@
+0101 -> 5 0011 -> 3
+0110 -> 6 0001 -> 1
+1000 -> 8 0010 -> 2
+
+pb
+pb
+pb
+sa
+sb
+rb
+pa
+pa
+pa
+
+Radix
+Quick sort
+Selection sort
+
+https://www.geeksforgeeks.org/radix-sort/
+
+-Dividir a pilha pelo msb, verificando top || down
+-Ordena a crescente
+-Ordena b decrescente
+-push back

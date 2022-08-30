@@ -1,4 +1,4 @@
-SRCS			=	push_swap.c
+SRCS			=	push_swap.c a_stack_handlers.c b_stack_handlers.c
 OBJS			=	${SRCS:%.c=$(OBJS_DIR)%.o}
 NAME			=	push_swap
 OBJS_DIR		=	objects/
@@ -11,10 +11,11 @@ $(OBJS_DIR)%.o:	%.c
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I includes
 
-all:		libft $(NAME)
+all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@$(CC) $(OBJS) -o $(NAME) $(LIBS)
+			@$(CC) $(OBJS) -o $(NAME)
+#			@$(CC) $(OBJS) -o $(NAME) $(LIBS)
 
 libft:
 			@make -C libft --no-print-directory
@@ -22,7 +23,8 @@ libft:
 libft_fclean:
 			@make fclean -C libft --no-print-directory
 
-clean:		libft_fclean
+#clean:		libft_fclean
+clean:
 			@$(RM) $(OBJS_DIR)
 
 fclean:		clean
