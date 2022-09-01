@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 03:25:29 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/08/28 07:13:56 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/01 01:22:15 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,11 @@ void	print_stack(t_stacks *stack)
 int	main(void)
 {
 	t_stacks	stack;
-	int arr[] = { 8, 5, 6, 3, 1, 2 };
+	int arr[] = { 2, 5, 6, 3, 1, 8 };
 
 	stack.a = arr;
 	stack.a_top = 5;
 	stack.b_top = -1;
 
-	print_stack(&stack);
-	push_b(&stack);
-	printf("==============\n");
-	print_stack(&stack);
-	push_b(&stack);
-	printf("==============\n");
-	print_stack(&stack);
-	push_b(&stack);
-	printf("==============\n");
-	print_stack(&stack);
-	push_a(&stack);
-	printf("==============\n");
-	print_stack(&stack);
-	push_a(&stack);
-	printf("==============\n");
-	print_stack(&stack);
-	push_a(&stack);
-	printf("==============\n");
-	print_stack(&stack);
+	radix_sort(&stack);
 }

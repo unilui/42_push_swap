@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 02:32:38 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/08/28 04:53:48 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:04:48 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void	rotate_a(t_stacks *stack);
 void	rotate_b(t_stacks *stack);
 void	r_rotate_a(t_stacks *stack);
 void	r_rotate_b(t_stacks *stack);
+void	radix_sort(t_stacks *stack);
+void	print_stack(t_stacks *stack);
 
 #endif

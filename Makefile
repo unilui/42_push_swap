@@ -1,4 +1,5 @@
-SRCS			=	push_swap.c a_stack_handlers.c b_stack_handlers.c
+SRCS			=	push_swap.c a_stack_handlers.c b_stack_handlers.c \
+					radix_sort.c
 OBJS			=	${SRCS:%.c=$(OBJS_DIR)%.o}
 NAME			=	push_swap
 OBJS_DIR		=	objects/
