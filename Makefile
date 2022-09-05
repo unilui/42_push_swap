@@ -12,11 +12,10 @@ $(OBJS_DIR)%.o:	%.c
 			@mkdir -p $(dir $@)
 			@$(CC) $(CFLAGS) -c $< -o $@ -I includes
 
-all:		$(NAME)
+all:		libft $(NAME)
 
 $(NAME):	$(OBJS)
-			@$(CC) $(OBJS) -o $(NAME)
-#			@$(CC) $(OBJS) -o $(NAME) $(LIBS)
+			@$(CC) $(OBJS) -o $(NAME) $(LIBS)
 
 libft:
 			@make -C libft --no-print-directory
@@ -24,8 +23,7 @@ libft:
 libft_fclean:
 			@make fclean -C libft --no-print-directory
 
-#clean:		libft_fclean
-clean:
+clean:		libft_fclean
 			@$(RM) $(OBJS_DIR)
 
 fclean:		clean

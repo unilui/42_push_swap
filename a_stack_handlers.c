@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 02:27:25 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/08/28 04:50:18 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/03 22:48:04 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	swap_a(t_stacks *stack)
 {
+	printf("sa\n");
 	int	tmp;
 
 	if (stack->a_top <= 0)
@@ -25,6 +26,7 @@ void	swap_a(t_stacks *stack)
 
 void	push_a(t_stacks *stack)
 {
+	printf("pa\n");
 	if (stack->b_top == -1)
 		return ;
 	stack->a_top++;
@@ -37,6 +39,7 @@ void	rotate_a(t_stacks *stack)
 	int tmp;
 	int	i;
 
+	printf("ra\n");
 	if (stack->a_top <= 0)
 		return ;
 	i = stack->a_top;
@@ -54,6 +57,7 @@ void	r_rotate_a(t_stacks *stack)
 	int tmp;
 	int	i;
 
+	printf("rra\n");
 	if (stack->a_top <= 0)
 		return ;
 	i = 0;

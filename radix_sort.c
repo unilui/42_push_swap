@@ -6,30 +6,24 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:23:20 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/01 02:54:38 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/04 22:18:11 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	classify_group(int nbr)
+int	classify_group(int nbr, t_stacks *stack)
 {
-	int	group;
-	//int subgroup;
-	int	bit_counter;
+	int	i;
 
-	bit_counter = 0;
-	group = 0;
-	while (bit_counter < 32)
+	i = 0;
+	while (i <= 99)
 	{
-		if ((nbr & (1 << bit_counter)) >> bit_counter)
-			group = bit_counter;
-		bit_counter++;
+		if (stack->index[i] == nbr)
+			break;
+		i++;
 	}
-	group++;
-	if (group > 2 && (nbr & (1 << (group - 2))) >> (group - 2))
-		return (group + 1);
-	return (group);
+	return ((i / 3) + 1);
 }
 
 int	find_group(int group, t_stacks *stack)
@@ -39,21 +33,25 @@ int	find_group(int group, t_stacks *stack)
 	i = stack->a_top;
 	while (i >= 0)
 	{
-		if (classify_group(stack->a[i]) == group)
+		if (classify_group(stack->a[i], stack) == group)
 			return (i);
 		i--;
 	}
 	return (-1);
 }
 
-void	try_to_push_b(int position, t_stacks *stack)
+void	try_to_push_b(int position, int group, t_stacks *stack)
 {
+	static int	pushed_group;
+	int			sort_b;
+
+	sort_b = 0;
 	if (position == stack->a_top)
-		push_b(stack);
-	else if (position == 0)
 	{
-		r_rotate_a(stack);
 		push_b(stack);
+		if (group == pushed_group)
+			sort_b = 1;
+		pushed_group = group;
 	}
 	else
 	{
@@ -61,6 +59,12 @@ void	try_to_push_b(int position, t_stacks *stack)
 			rotate_a(stack);
 		else
 			r_rotate_a(stack);
+	}
+	if (sort_b)
+	{
+		if (stack->b[stack->b_top - 1] > stack->b[stack->b_top])
+			swap_b(stack);
+		sort_b = 0;
 	}
 }
 
@@ -82,54 +86,118 @@ void	ascending_sort(t_stacks *stack)
 {
 	while (!ascending_check(stack))
 	{
-		if (stack->a[stack->a_top] > stack->a[stack->a_top - 1]
-		&&	stack->a[stack->a_top] != 8)
-			swap_a(stack);
-		else
+		if (stack->a[stack->a_top] > stack->a[0])
 			rotate_a(stack);
+		else
+			swap_a(stack);
+	}
+}
+
+int	max_group(t_stacks *stack)
+{
+	int	i;
+	int	max;
+
+	i = stack->a_top;
+	max = 0;
+	while (i >= 0)
+	{
+		if (classify_group(stack->a[i], stack) > max)
+			max = classify_group(stack->a[i], stack);
+		i--;
+	}
+	return (max);
+}
+
+void	group_push_b(t_stacks *stack)
+{
+	int	m_group;
+	int	group;
+	int	position;
+
+	m_group = max_group(stack);
+	group = 1;
+	while (group < m_group)
+	{
+		position = find_group(group, stack);
+		while (position != -1 && stack->a_top >= 3)
+		{
+			try_to_push_b(position, group, stack);
+			position = find_group(group, stack);
+		}
+		group++;
+	}
+}
+
+void	try_to_push_a(int position, t_stacks *stack)
+{
+	if ((stack->b_top - position) == 0)
+		push_a(stack);
+	else
+	{
+		swap_b(stack);
+		push_a(stack);
+	}
+}
+
+int	get_biggest(int group, t_stacks *stack)
+{
+	int	i;
+	int	biggest;
+	int	biggest_i;
+
+	i = stack->b_top;
+	biggest = 0;
+	biggest_i = 0;
+	while (i >= 0 && classify_group(stack->b[i], stack) == group)
+	{
+		if (stack->b[i] > biggest)
+		{
+			biggest = stack->b[i];
+			biggest_i = i;
+		}
+		i--;
+	}
+	return (biggest_i);
+}
+
+int	find_group_b(int group, t_stacks *stack)
+{
+	int	i;
+
+	i = stack->b_top;
+	while (i >= 0)
+	{
+		if (classify_group(stack->b[i], stack) == group)
+			return (i);
+		i--;
+	}
+	return (-1);
+}
+
+void	group_push_a(t_stacks *stack)
+{
+	int	m_group;
+	int	group;
+	int	position;
+
+	m_group = max_group(stack);
+	group = m_group - 1;
+	while (group >= 1)
+	{
+		position = find_group_b(group, stack);
+		while (position != -1)
+		{
+			try_to_push_a(get_biggest(group, stack), stack);
+			position = find_group_b(group, stack);
+		}
+		group--;
 	}
 }
 
 void	radix_sort(t_stacks *stack)
 {
-	//int	max_group;
-	//int	group;
-	//int	position;
-//
-	//max_group = 2;
-	//group = 1;
-	//while (group < max_group)
-	//{
-	//	position = find_group(group, stack);
-	//	while (position != -1)
-	//	{
-	//		try_to_push_b(position, stack);
-	//		position = find_group(group, stack);
-	//	}
-	//	group++;
-	//}
-	//ascending_sort(stack);
-	//print_stack(stack);
-	(void)stack;
-	//printf("%d\n", classify_group(0));
-	printf("1  -> %d\n", classify_group(1));
-	printf("2  -> %d\n", classify_group(2));
-	printf("3  -> %d\n", classify_group(3));
-	printf("4  -> %d\n", classify_group(4));
-	printf("5  -> %d\n", classify_group(5));
-	printf("6  -> %d\n", classify_group(6));
-	printf("7  -> %d\n", classify_group(7));
-	printf("8  -> %d\n", classify_group(8));
-	printf("9  -> %d\n", classify_group(9));
-	printf("10 -> %d\n", classify_group(10));
-	printf("11 -> %d\n", classify_group(11));
-	printf("12 -> %d\n", classify_group(12));
-	printf("13 -> %d\n", classify_group(13));
-	printf("14 -> %d\n", classify_group(14));
-	printf("15 -> %d\n", classify_group(15));
-	//printf("16 -> %d\n", classify_group(16));
-	//printf("17 -> %d\n", classify_group(17));
-	//printf("18 -> %d\n", classify_group(18));
-	//printf("19 -> %d\n", classify_group(19));
-	//printf("20 -> %d\n", classify_group(20));
+	group_push_b(stack);
+	ascending_sort(stack);
+	group_push_a(stack);
 }
