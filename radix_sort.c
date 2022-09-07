@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:23:20 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/04 22:18:11 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/07 02:59:58 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,152 @@ void	group_push_a(t_stacks *stack)
 	}
 }
 
+// ==================================================== //
+
+void	region_try_push_b(int position, t_stacks *stack)
+{
+	if (stack->a_top == position)
+	{
+		push_b(stack);
+		//if (stack->b_top > 0)
+		//{
+		//	if (stack->b[stack->b_top - 1] > stack->b[stack->b_top])
+		//		swap_b(stack);
+		//}
+	}
+	else
+		rotate_a(stack);
+}
+
+void	region_try_push_a(int position, t_stacks *stack)
+{
+	if (stack->b_top == position)
+	{
+		push_a(stack);
+		//if (stack->a_top > 0)
+		//{
+		//	if (stack->a[stack->a_top - 1] < stack->a[stack->a_top])
+		//		swap_a(stack);
+		//}
+	}
+	else
+		rotate_b(stack);
+}
+
+int	find_region(int region, char direction, t_stacks *stack)
+{
+	int	i;
+
+	if (direction == 'B')
+		i = stack->a_top;
+	else
+		i = stack->b_top;
+	while (i >= 0)
+	{
+		if (direction == 'B')
+		{
+			if (classify_group(stack->a[i], stack) <= region)
+				return (i);
+		}
+		else
+		{
+			if (classify_group(stack->b[i], stack) >= region)
+				return (i);
+		}
+		i--;
+	}
+	return (-1);
+}
+
+void	region_push_b(t_stacks *stack, int max_group)
+{
+	int	region;
+	int	region_i;
+	int	position;
+
+	region = max_group / 2;
+	region_i = region;
+	while (stack->a_top >= 0)
+	{
+		position = find_region(region, 'B', stack);
+		while (position != -1)
+		{
+			region_try_push_b(position, stack);
+			position = find_region(region, 'B', stack);
+		}
+		region_i /= 2;
+		if (region_i == 0)
+			region_i = 1;
+		region += region_i;
+	}
+}
+
+void	region_push_a(t_stacks *stack, int max_group)
+{
+	int	region;
+	int	region_i;
+	int	position;
+
+	region = max_group / 2;
+	region_i = region;
+	while (stack->b_top >= 0)
+	{
+		position = find_region(region, 'A', stack);
+		while (position != -1)
+		{
+			region_try_push_a(position, stack);
+			position = find_region(region, 'A', stack);
+		}
+		region_i /= 2;
+		if (region_i == 0)
+			region_i = 1;
+		region -= region_i;
+	}
+}
+
+void	final_push_b(t_stacks *stack)
+{
+	while (stack->a_top >= 0 && !ascending_check(stack))
+	{
+		push_b(stack);
+		if (stack->b_top > 0)
+		{
+			if (stack->b[stack->b_top - 1] > stack->b[stack->b_top])
+				swap_b(stack);
+		}
+	}
+}
+
+void	final_push_a(t_stacks *stack)
+{
+	while (stack->b_top >= 0)
+	{
+		if (stack->b_top > 0)
+		{
+			if (stack->b[stack->b_top - 1] > stack->b[stack->b_top])
+				swap_b(stack);
+		}
+		push_a(stack);
+		if (stack->a_top > 0)
+		{
+			if (stack->a[stack->a_top - 1] < stack->a[stack->a_top])
+				swap_a(stack);
+		}
+	}
+}
+
 void	radix_sort(t_stacks *stack)
 {
+	int max;
+
+	max = max_group(stack);
+	region_push_b(stack, max);
+	region_push_a(stack, max);
+	//while (!ascending_check(stack))
+	//{
+	//  final_push_b(stack);
+	//  final_push_a(stack);
+	//}
 	group_push_b(stack);
 	ascending_sort(stack);
 	group_push_a(stack);

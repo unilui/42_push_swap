@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 02:32:38 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/04 19:44:49 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:15:54 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_stacks {
 	int	*a;
-	int	b[100];
+	int	*b;
 	int	a_top;
 	int	b_top;
 	int	*index;
