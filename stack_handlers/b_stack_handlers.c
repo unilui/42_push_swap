@@ -6,17 +6,18 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 02:27:22 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/03 22:48:41 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/09 00:48:24 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
 
 void	swap_b(t_stacks *stack)
 {
 	int	tmp;
 
-	printf("sb\n");
+	ft_printf("sb\n");
 	if (stack->b_top <= 0)
 		return ;
 	tmp = stack->b[stack->b_top];
@@ -26,7 +27,7 @@ void	swap_b(t_stacks *stack)
 
 void	push_b(t_stacks *stack)
 {
-	printf("pb\n");
+	ft_printf("pb\n");
 	if (stack->a_top == -1)
 		return ;
 	stack->b_top++;
@@ -36,10 +37,10 @@ void	push_b(t_stacks *stack)
 
 void	rotate_b(t_stacks *stack)
 {
-	int tmp;
+	int	tmp;
 	int	i;
 
-	printf("rb\n");
+	ft_printf("rb\n");
 	if (stack->b_top <= 0)
 		return ;
 	i = stack->b_top;
@@ -54,10 +55,10 @@ void	rotate_b(t_stacks *stack)
 
 void	r_rotate_b(t_stacks *stack)
 {
-	int tmp;
+	int	tmp;
 	int	i;
 
-	printf("rrb\n");
+	ft_printf("rrb\n");
 	if (stack->b_top <= 0)
 		return ;
 	i = 0;
