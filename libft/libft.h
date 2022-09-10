@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:38:38 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 03:57:52 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:01:36 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_str {
 
 typedef void	(*t_replace)(t_str *str);
 
+int			ft_strcmp(char *s1, char *s2);
 void		ft_sort_int_tab(int *tab, int size);
 void		ft_swap(int *a, int *b);
 long		ft_atoi(const char *nptr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lufelip2 <lufelip2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 01:40:47 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 02:19:24 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:21:50 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ int	stack_parser(t_stacks *stack, char *stack_input)
 	stack->b = malloc(stack_size * sizeof(int));
 	stack->index = malloc(stack_size * sizeof(int));
 	if (!stack->a || !stack->b || !stack->index)
+	{
+		free_table(splitted_stack);
 		return (0);
+	}
 	fill_stack(stack->a, splitted_stack, stack_size);
 	fill_stack(stack->index, splitted_stack, stack_size);
 	ft_sort_int_tab(stack->index, stack_size);
 	stack->size = stack_size - 1;
 	stack->a_top = stack_size - 1;
 	stack->b_top = -1;
+	free_table(splitted_stack);
 	return (1);
 }

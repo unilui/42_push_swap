@@ -13,6 +13,7 @@ SRCS =		ft_isalnum.c	ft_isalpha.c		ft_isascii.c	\
 			ft_put_ptr.c	ft_put_u_nbr.c		ft_putchar.c	\
 			ft_putnbr.c		ft_putstr.c			get_next_line.c	\
 			ft_put_x_nbr.c	ft_sort_int_tab.c	ft_swap.c		\
+			ft_strcmp.c											\
 			ft_printf_utils/placeholder.c						\
 			ft_printf_utils/replace_handler.c					\
 			ft_printf_utils/replace_nbr.c						\

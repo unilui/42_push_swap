@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frank_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lufelip2 <lufelip2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:23:20 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 02:15:40 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:33:48 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	sort_push_b(t_stacks *stack, int max_group)
 	while (group < m_group)
 	{
 		position = find_group(group, stack);
-		while (position != -1 && stack->a_top >= 3)
+		while (position != -1 && stack->a_top >= (3 - (stack->size == 3)))
 		{
 			try_to_push_b(position, group, stack);
 			position = find_group(group, stack);
@@ -94,9 +94,14 @@ void	frank_sort(t_stacks *stack)
 {
 	int	max;
 
+	if (stack->size == 0 || ascending_check(stack))
+		return ;
 	max = max_group(stack);
-	pre_sort_push_b(stack, max);
-	pre_sort_push_a(stack, max);
+	if (stack->size > 4)
+	{
+		pre_sort_push_b(stack, max);
+		pre_sort_push_a(stack, max);
+	}
 	sort_push_b(stack, max);
 	simple_sort(stack);
 	sort_push_a(stack, max);

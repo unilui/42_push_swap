@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lufelip2 <lufelip2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 02:56:02 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 04:04:13 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:21:07 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	value_check(char **stack)
 
 	i = 0;
 	x = 0;
-	while(stack[i])
+	while (stack[i])
 	{
 		nbr = ft_atoi(stack[i]);
 		if (nbr > __INT_MAX__)
@@ -43,7 +43,7 @@ int	digit_check(char *stack)
 	int	i;
 
 	i = 0;
-	while(stack[i])
+	while (stack[i])
 	{
 		if (ft_isdigit(stack[i])
 			|| stack[i] == '+'
@@ -63,6 +63,10 @@ int	validate(char *stack)
 	splitted_stack = ft_split(stack, ' ');
 	if (digit_check(stack)
 		&& value_check(splitted_stack))
+	{
+		free_table(splitted_stack);
 		return (1);
+	}
+	free_table(splitted_stack);
 	return (0);
 }

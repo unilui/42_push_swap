@@ -6,6 +6,7 @@ SRCS			=	stack_handlers/a_stack_handlers.c	\
 					sorting_algorithm/sort_utils.c		\
 					validation/stack_parser.c			\
 					validation/validate.c				\
+					validation/memory.c					\
 					push_swap.c
 OBJS			=	${SRCS:%.c=$(OBJS_DIR)%.o}
 NAME			=	push_swap
@@ -24,6 +25,9 @@ all:		libft $(NAME)
 $(NAME):	$(OBJS)
 			@$(CC) $(OBJS) -o $(NAME) $(LIBS)
 
+test:
+	${TESTS}
+
 libft:
 			@make -C libft --no-print-directory
 
@@ -39,3 +43,4 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all clean fclean re libft
+
