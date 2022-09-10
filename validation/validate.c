@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/28 03:25:29 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 03:16:54 by lufelip2         ###   ########.fr       */
+/*   Created: 2022/09/10 02:56:02 by lufelip2          #+#    #+#             */
+/*   Updated: 2022/09/10 03:17:11 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-int	main(int argc, char **argv)
+int	digit_check(char *stack)
 {
-	t_stacks	stack;
+	int	i;
 
-	if (validate(argv[1]) && stack_parser(&stack, argv[1]))
-		ft_printf("Ok!\n");
-	(void)argc;
-	//frank_sort(&stack);
+	i = 0;
+	while(stack[i])
+	{
+		if (ft_isdigit(stack[i])
+			|| stack[i] == '+'
+			|| stack[i] == '-'
+			|| stack[i] == ' ')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	validate(char *stack)
+{
+	if (digit_check(stack))
+		return (1);
+	return (0);
 }

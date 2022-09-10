@@ -1,10 +1,12 @@
-SRCS			=	stack_handlers/a_stack_handlers.c \
-					stack_handlers/b_stack_handlers.c \
-					sorting_algorithm/frank_sort.c \
-					sorting_algorithm/frank_pre_sort.c \
-					sorting_algorithm/simple_sort.c \
-					sorting_algorithm/sort_utils.c \
-					push_swap.c stack_parser.c
+SRCS			=	stack_handlers/a_stack_handlers.c	\
+					stack_handlers/b_stack_handlers.c	\
+					sorting_algorithm/frank_sort.c		\
+					sorting_algorithm/frank_pre_sort.c	\
+					sorting_algorithm/simple_sort.c		\
+					sorting_algorithm/sort_utils.c		\
+					validation/stack_parser.c			\
+					validation/validate.c				\
+					push_swap.c
 OBJS			=	${SRCS:%.c=$(OBJS_DIR)%.o}
 NAME			=	push_swap
 OBJS_DIR		=	objects/
