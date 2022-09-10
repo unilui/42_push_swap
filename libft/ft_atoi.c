@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 21:05:25 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/06/05 19:50:58 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 03:58:08 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static int	is_space(char c)
 		|| c == '\r');
 }
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
-	int	num;
-	int	signal;
+	long	num;
+	int		signal;
 
 	num = 0;
 	signal = 1;

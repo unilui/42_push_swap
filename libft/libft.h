@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:38:38 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/04 17:09:28 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 03:57:52 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef void	(*t_replace)(t_str *str);
 
 void		ft_sort_int_tab(int *tab, int size);
 void		ft_swap(int *a, int *b);
-int			ft_atoi(const char *nptr);
+long		ft_atoi(const char *nptr);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
