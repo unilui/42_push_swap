@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 17:08:29 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/04 21:35:51 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 02:18:25 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_sort_int_tab(int *tab, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)

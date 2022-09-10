@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 01:40:47 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/09 23:53:33 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 02:19:24 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	count_stack(char **stack)
 	int	i;
 
 	i = 0;
-	while(stack[i])
+	while (stack[i])
 		i++;
 	return (i);
 }
@@ -30,7 +30,7 @@ void	fill_stack(int *dest, char **src, int size)
 
 	i = size - 1;
 	x = 0;
-	while(i >= 0)
+	while (i >= 0)
 	{
 		dest[x] = ft_atoi(src[i]);
 		i--;
@@ -55,6 +55,6 @@ int	stack_parser(t_stacks *stack, char *stack_input)
 	ft_sort_int_tab(stack->index, stack_size);
 	stack->size = stack_size - 1;
 	stack->a_top = stack_size - 1;
-	stack->b_top = - 1;
+	stack->b_top = -1;
 	return (1);
 }

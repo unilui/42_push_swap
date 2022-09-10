@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:23:20 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 01:47:07 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 02:15:40 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	try_to_push_b(int position, int group, t_stacks *stack)
 	}
 }
 
-void	try_to_push_a(int position, t_stacks *stack)
+void	group_push_a(t_stacks *stack)
 {
-	(void)position;
 	push_a(stack);
 	if (stack->a_top > 0)
 	{
@@ -51,7 +50,7 @@ void	try_to_push_a(int position, t_stacks *stack)
 	}
 }
 
-void	group_push_a(t_stacks *stack, int max_group)
+void	sort_push_a(t_stacks *stack, int max_group)
 {
 	int	m_group;
 	int	group;
@@ -64,14 +63,14 @@ void	group_push_a(t_stacks *stack, int max_group)
 		position = find_group_b(group, stack);
 		while (position != -1)
 		{
-			try_to_push_a(1, stack);
+			group_push_a(stack);
 			position = find_group_b(group, stack);
 		}
 		group--;
 	}
 }
 
-void	group_push_b(t_stacks *stack, int max_group)
+void	sort_push_b(t_stacks *stack, int max_group)
 {
 	int	m_group;
 	int	group;
@@ -98,7 +97,7 @@ void	frank_sort(t_stacks *stack)
 	max = max_group(stack);
 	pre_sort_push_b(stack, max);
 	pre_sort_push_a(stack, max);
-	group_push_b(stack, max);
+	sort_push_b(stack, max);
 	simple_sort(stack);
-	group_push_a(stack, max);
+	sort_push_a(stack, max);
 }

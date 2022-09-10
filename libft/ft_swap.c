@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 17:03:24 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/04 17:03:58 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/10 02:19:41 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_swap(int *a, int *b)
 {
-	int hold;
+	int	hold;
 
 	hold = *a;
 	*a = *b;
