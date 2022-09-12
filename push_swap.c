@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 03:25:29 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 22:45:07 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/12 06:05:33 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,27 @@ int	main(int argc, char **argv)
 {
 	t_stacks	stack;
 
-	if (argc != 2)
+	if (argc == 1)
 		return (1);
-	if (validate(argv[1]) && stack_parser(&stack, argv[1]))
-		frank_sort(&stack);
+	if (argc == 2)
+	{
+		if (zsh_validate(argv[1]) && zsh_stack_parser(&stack, argv[1]))
+		{
+			frank_sort(&stack);
+			free_stack(&stack);
+		}
+		else
+			ft_putstr_fd("Error\n", 2);
+	}
 	else
-		ft_putstr_fd("Error\n", 2);
-	free_stack(&stack);
+	{
+		if (bash_validate(argv) && bash_stack_parser(&stack, argv))
+		{
+			frank_sort(&stack);
+			free_stack(&stack);
+		}
+		else
+			ft_putstr_fd("Error\n", 2);
+	}
 	return (0);
 }

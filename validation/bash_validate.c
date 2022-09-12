@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate.c                                         :+:      :+:    :+:   */
+/*   bash_validate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lufelip2 <lufelip2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 02:56:02 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 22:21:07 by lufelip2         ###   ########.fr       */
+/*   Created: 2022/09/12 03:58:44 by lufelip2          #+#    #+#             */
+/*   Updated: 2022/09/12 06:13:15 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-int	value_check(char **stack)
+static int	value_check(char **stack)
 {
 	int		i;
 	int		x;
 	long	nbr;
 
-	i = 0;
-	x = 0;
+	i = 1;
+	x = 1;
 	while (stack[i])
 	{
 		nbr = ft_atoi(stack[i]);
-		if (nbr > __INT_MAX__)
+		if (nbr > INT_MAX || nbr < INT_MIN)
 			return (0);
 		while (stack[x])
 		{
@@ -32,13 +32,13 @@ int	value_check(char **stack)
 				return (0);
 			x++;
 		}
-		x = 0;
+		x = 1;
 		i++;
 	}
 	return (1);
 }
 
-int	digit_check(char *stack)
+static int	digit_check(char *stack)
 {
 	int	i;
 
@@ -56,17 +56,25 @@ int	digit_check(char *stack)
 	return (1);
 }
 
-int	validate(char *stack)
+int	table_digit_check(char **stack)
 {
-	char	**splitted_stack;
+	int	i;
 
-	splitted_stack = ft_split(stack, ' ');
-	if (digit_check(stack)
-		&& value_check(splitted_stack))
+	i = 1;
+	while (stack[i])
 	{
-		free_table(splitted_stack);
-		return (1);
+		if (digit_check(stack[i]))
+			i++;
+		else
+			return (0);
 	}
-	free_table(splitted_stack);
+	return (1);
+}
+
+int	bash_validate(char **stack)
+{
+	if (table_digit_check(stack)
+		&& value_check(stack))
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lufelip2 <lufelip2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:23:20 by lufelip2          #+#    #+#             */
-/*   Updated: 2022/09/10 22:33:48 by lufelip2         ###   ########.fr       */
+/*   Updated: 2022/09/12 05:54:47 by lufelip2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	sort_push_b(t_stacks *stack, int max_group)
 	while (group < m_group)
 	{
 		position = find_group(group, stack);
-		while (position != -1 && stack->a_top >= (3 - (stack->size == 3)))
+		while (position != -1 && stack->a_top >= (2 + (stack->size == 4)))
 		{
 			try_to_push_b(position, group, stack);
 			position = find_group(group, stack);
